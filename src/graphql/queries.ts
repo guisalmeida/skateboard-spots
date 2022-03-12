@@ -14,7 +14,7 @@ export const GET_PAGES = gql`
 `
 export const GET_PAGE_BY_SLUG = gql`
   query getPageBySlug($slug: String) {
-    pages(where: { slug: $slug }) {
+    page(where: { slug: $slug }) {
       id
       slug
       heading
