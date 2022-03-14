@@ -13,7 +13,7 @@
     "codegen": "graphql-codegen --config codegen.yml"
   },
   "lint-staged": {
-    "src/components/**/*": [
+    "src/components/**/*.test.tsx": [
       "npm run lint --fix",
       "npm run test --findRelatedTests --bail"
     ]
@@ -25,6 +25,7 @@
     "leaflet": "^1.7.1",
     "next": "12.1.0",
     "next-pwa": "^5.4.5",
+    "nextjs-progressbar": "^0.0.14",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-leaflet": "^3.2.5",
@@ -34,6 +35,8 @@
     "@babel/preset-typescript": "^7.16.7",
     "@graphql-codegen/add": "^3.1.1",
     "@graphql-codegen/cli": "2.6.2",
+    "@graphql-codegen/typescript": "2.4.7",
+    "@graphql-codegen/typescript-operations": "2.3.4",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.3",
     "@types/jest": "^27.4.1",
@@ -55,8 +58,6 @@
     "jest-styled-components": "^7.0.8",
     "lint-staged": "^12.3.4",
     "prettier": "2.5.1",
-    "typescript": "4.5.5",
-    "@graphql-codegen/typescript-operations": "2.3.4",
-    "@graphql-codegen/typescript": "2.4.7"
+    "typescript": "4.5.5"
   }
 }
