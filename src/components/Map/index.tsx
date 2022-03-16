@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router'
-import { MapContainer, TileLayer, Marker } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, MapConsumer } from 'react-leaflet'
+import L from 'leaflet'
 
 import * as S from './styles'
 
@@ -35,6 +36,13 @@ const CustomTileLayer = () => {
   )
 }
 
+const markerIcon = new L.Icon({
+  iconUrl: 'img/skateboard-icon.png',
+  iconSize: [40, 40],
+  iconAnchor: [20, 20],
+  popupAnchor: [0, -40]
+})
+
 const Map = ({ places }: MapProps) => {
   const router = useRouter()
 
@@ -43,8 +51,26 @@ const Map = ({ places }: MapProps) => {
       <MapContainer
         center={[0, 0]}
         zoom={3}
+        minZoom={3}
+        maxBounds={[
+          [-180, 180],
+          [180, -180]
+        ]}
         style={{ height: '100%', width: '100%' }}
       >
+        <MapConsumer>
+          {(map) => {
+            const screenWidth =
+              window.innerWidth ||
+              document.documentElement.clientWidth ||
+              document.body.clientWidth
+
+            if (screenWidth < 768) {
+              map.setMinZoom(2)
+            }
+            return null
+          }}
+        </MapConsumer>
         <CustomTileLayer />
 
         {places?.map(({ id, name, location, slug }) => {
@@ -55,6 +81,7 @@ const Map = ({ places }: MapProps) => {
               key={`place-${id}`}
               position={[latitude, longitude]}
               title={name}
+              icon={markerIcon}
               eventHandlers={{
                 click: () => {
                   router.push(`/place/${slug}`)
